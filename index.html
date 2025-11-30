@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Curvas Paramétricas – Bézier & Spline (Superfície de Revolução)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="container">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <h2>Curvas Paramétricas</h2>
+
+      <div class="section">
+        <label for="curveType">Tipo de Curva:</label>
+        <select id="curveType">
+          <option value="bezier">Bézier</option>
+          <option value="spline">B-Spline</option>
+        </select>
+      </div>
+
+      <div id="bezierMenu" class="section">
+        <h3>Bézier</h3>
+        <label>Peso do ponto selecionado:</label>
+        <input id="weightSlider" type="range" min="1" max="10" value="1">
+        <span id="weightValue">1</span>
+      </div>
+
+      <div id="splineMenu" class="section hidden">
+        <h3>B-Spline</h3>
+        <label for="splineDegree">Grau:</label>
+        <input id="splineDegree" type="number" min="1" max="5" value="3">
+        <label for="splineStep">Passo (amostras):</label>
+        <input id="splineStep" type="range" min="8" max="512" value="80">
+        <span id="stepValue">80</span>
+      </div>
+
+      <hr />
+
+      <h3>Revolução 3D</h3>
+      <label for="axis">Eixo de revolução:</label>
+      <select id="axis">
+        <option value="Y">Y</option>
+        <option value="X">X</option>
+        <option value="Z">Z</option>
+      </select>
+
+      <label for="angle">Ângulo (°):</label>
+      <input id="angle" type="number" min="0" max="360" value="360">
+
+      <label for="divisions">Divisões angulares:</label>
+      <input id="divisions" type="number" min="3" max="512" value="64">
+
+      <div class="controls-row">
+        <button id="addPointBtn" class="btn">Adicionar Ponto</button>
+        <button id="clearBtn" class="btn">Limpar Perfil</button>
+      </div>
+
+      <div class="controls-row">
+        <button id="surfaceBtn" class="btn primary">Gerar Superfície 3D</button>
+        <button id="clearSurfaceBtn" class="btn">Limpar Superfície</button>
+      </div>
+
+      <div class="controls-row">
+        <button id="exportJSON" class="btn">Exportar JSON</button>
+        <button id="exportOBJ" class="btn">Exportar OBJ</button>
+        <button id="exportSTL" class="btn">Exportar STL (ASCII)</button>
+      </div>
+
+      <hr />
+
+      <div class="section small">
+        <label for="renderMode">Modo de visualização:</label>
+        <select id="renderMode">
+          <option value="solid">Sólido (flat)</option>
+          <option value="smooth">Suavizado (smooth)</option>
+          <option value="wire">Wireframe</option>
+        </select>
+        <p class="hint">Clique no canvas: adicionar (modo normal) / arraste para mover; Delete remove ponto selecionado; clique direito também remove.</p>
+      </div>
+
+      <footer>
+        <small>Protótipo — Modo escuro • Desenvolvido para testes</small>
+      </footer>
+    </aside>
+
+    <!-- MAIN: Canvas 2D e Viewer 3D -->
+    <main id="main">
+      <div id="canvasArea">
+        <canvas id="canvas2d"></canvas>
+      </div>
+      <div id="viewerArea">
+        <div id="viewer3d"></div>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Three.js + OrbitControls via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/examples/js/controls/OrbitControls.min.js"></script>
+
+  <!-- Script principal -->
+  <script src="main.js"></script>
+</body>
+</html>
